@@ -1,3 +1,5 @@
+🔴❗UNDER DEVELOPMENT❗🔴
+
 # Principal Component Analysis Automation (PCAauto)
 
 PCAauto is a script developed to automate the PCA analysis of Molecular Dynamics.
@@ -32,10 +34,8 @@ You may modify the main.py file depending on which calculation you are intereste
 
 ## Observations
 
-According to its website, Norine database is freely available to everybody, under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International ([CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)). No changes were made on its structure or data.
+This script was developed following the MDA Analysis documentation, specifically the [MDA Analysis examples](http://minium.com.au/UserGuide/stable/examples/analysis/reduced_dimensions/pca.html) page.
 
 ## Authorship
 
 * Author: **Brenda Ferrari** ([brendaferrari](https://github.com/brendaferrari))
-
-Social preview original photo by **Brenda Ferrari** ([brendaferrari](https://github.com/brendaferrari))
