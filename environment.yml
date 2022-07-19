@@ -1,0 +1,25 @@
+name: pca-mdanalysis
+
+channels:
+  - conda-forge
+  - defaults
+
+#for windows uncomment this
+dependencies:
+  - python=3.8
+  - matplotlib=3.5.2
+  - mdanalysis=2.2.0
+  - pandas=1.4.2
+  - numpy=1.22.3
+  - nglview=3.0.3
+  - xlsxwriter=0.9.8
+
+# #For linux uncomment this
+# dependencies:
+#   - python=3.8
+#   - matplotlib=3.5.2
+#   - mdanalysis=2.2.0
+#   - pandas=1.4.2
+#   - numpy=1.23.1
+#   - nglview=3.0.3
+#   - xlsxwriter=3.0.3
