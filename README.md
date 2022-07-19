@@ -32,6 +32,18 @@ conda activate pca-mdaanalysis
 
 You may modify the main.py file depending on which calculation you are interested.
 
+The program uses a shell script to automate the calculation of data in multiple folders. To use this feature go to the root directory and on the terminal use:
+
+```
+bash \calculatePCA_inBulk.sh
+```
+
+If you are interested only on running one folder, you may just add your files to the PCAauto directory and use:
+
+```
+python calculatePCA.py
+```
+
 ## Observations
 
 This script was developed following the MDA Analysis documentation, specifically the [MDA Analysis examples](http://minium.com.au/UserGuide/stable/examples/analysis/reduced_dimensions/pca.html) page.
