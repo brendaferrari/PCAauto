@@ -90,7 +90,7 @@ class Plot:
 
         plt.plot(pc.variance[zeroth_dimension:nth_dimension])
         plt.xlabel('Principal component')
-        plt.ylabel('Cumulative variance');
+        plt.ylabel('Variance');
 
         plt.savefig('variance.png')
 
@@ -100,7 +100,7 @@ class Plot:
 
         plt.plot(pc.cumulated_variance[zeroth_dimension:nth_dimension])
         plt.xlabel('Principal component')
-        plt.ylabel('Variance');
+        plt.ylabel('Cumulated variance');
 
         plt.savefig('cumulated_variance.png')
 
@@ -108,7 +108,6 @@ class Plot:
 
     def time_plot(self, df):
         
-
         g = sns.PairGrid(df, hue='Time (ps)',
                          palette=sns.color_palette('Oranges_d',
                                                    n_colors=len(df)))
