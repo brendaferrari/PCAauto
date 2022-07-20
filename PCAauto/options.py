@@ -54,11 +54,11 @@ class Options:
 
         return df, transformed
 
-    def visualize_movement(self, transformed): #This is bugged
+    def visualize_movement(self, transformed, backbone): #This is bugged
 
         pc1 = self.pc.p_components[:, 0]
         trans1 = transformed[:, 0]
-        projected = np.outer(trans1, pc1) + self.pc.mean
+        projected = np.outer(trans1, pc1) + self.pc.mean.flatten()
         coordinates = projected.reshape(len(trans1), -1, 3)
 
         proj1 = mda.Merge(backbone)

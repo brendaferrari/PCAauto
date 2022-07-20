@@ -9,7 +9,7 @@ Available methods are:
 * PCA analysis
 * Calculation of variance, cumulated varianc and explained variance (this last one only for 3 components for now)
 * Calculation of PCA through simulation time
-* Visualization o the movements of the components on model (needs bugfix)
+* Visualization o the movements of the components on model
 * Also, there is the possibility to plot graphs (under development)
 
 ## Instalation
