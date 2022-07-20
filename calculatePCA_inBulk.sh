@@ -4,7 +4,7 @@ echo starting PCA analysis;
 
 for dir in input/*; 
 
-do cp {PCAauto/calculatePCA.py,options.py,plot.py} "$dir";
+do cp PCAauto/{calculatePCA.py,options.py,plot.py} "$dir";
 
 cd "$dir";
 
