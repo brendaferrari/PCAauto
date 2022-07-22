@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 import MDAnalysis as mda
+import glob
+import csv
 
 class Options:
 
@@ -68,3 +70,57 @@ class Options:
         proj1.atoms.write('pca1.dcd', frames='all')
 
         return proj1
+
+    def generate_dat_file(self, cumulated_variance=False, variance=True):
+
+        data = []
+
+        import os
+        os.chdir('../input/calculated1')
+        workdir = os.getcwd()
+
+        if variance == True:
+            File = 'variance.txt'
+
+            for root, dirs, files in os.walk(workdir):
+                if File in files:
+                    summary_path = root + '/' + File
+                    column_name = root.split('/')
+                    search_file = open(summary_path, 'r', encoding='utf-8')
+                    lines = search_file.readlines()
+                    line_clean = []
+                    for line in lines:
+                        line_cleaned = line.strip('\n')
+                        line_clean.append(line_cleaned)
+                    print(line_clean)
+                    line_clean.insert(0, column_name[-1])
+                    data.append(line_clean)
+
+            df = pd.DataFrame(data).transpose()
+            df.rename(columns=df.iloc[0], inplace=True)
+            df = df.iloc[1:]
+            df.to_csv('variance.csv', sep=' ', quoting=csv.QUOTE_ALL, index=None)
+
+        if cumulated_variance == True:
+            File = 'cumulated_variance.txt'
+
+            for root, dirs, files in os.walk(workdir):
+                if File in files:
+                    summary_path = root + '/' + File
+                    column_name = root.split('/')
+                    search_file = open(summary_path, 'r', encoding='utf-8')
+                    lines = search_file.readlines()
+                    line_clean = []
+                    for line in lines:
+                        line_cleaned = line.strip('\n')
+                        line_clean.append(line_cleaned)
+                    print(line_clean)
+                    line_clean.insert(0, column_name[-1])
+                    data.append(line_clean)
+
+            df = pd.DataFrame(data).transpose()
+            df.rename(columns=df.iloc[0], inplace=True)
+            df = df.iloc[1:]
+            df.to_csv('cumulated_variance.csv', sep=' ', quoting=csv.QUOTE_ALL, index=None)
+
+        return df
