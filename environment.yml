@@ -13,6 +13,7 @@ dependencies:
   - numpy=1.22.3
   - nglview=3.0.3
   - xlsxwriter=0.9.8
+  - plotly=5.9.0
 
 # #For linux uncomment this
 # dependencies:
@@ -23,3 +24,4 @@ dependencies:
 #   - numpy=1.23.1
 #   - nglview=3.0.3
 #   - xlsxwriter=3.0.3
+#   - plotly=5.9.0
