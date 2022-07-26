@@ -49,6 +49,14 @@ plot.variance_plot(variance, pc, 0, 10)
 
 combine_df, transformed = opt.combine_dataframe(backbone, 2)
 combine_plot = plot.time_plot(combine_df)
-combine_plot_scatter = plot.time_scatterplot(combine_df)
+# combine_plot_scatter = plot.time_scatterplot(combine_df) >>> bug
 
-visualize = opt.visualize_movement(transformed, backbone)
+visualize = opt.visualize_movement(transformed, backbone, pc=0) #pc=0 is pc1
+
+data = opt.generate_dat_file(variance=False, cumulated_variance=True)
+
+plot.bar_plot(xlabel='Cumulated variance', ylabel='Force field/water model', zlabel='Eigenvalue Magnitude', 
+              xxlabels=['PC1', 'PC2', 'PC3','PC4', 'PC5','PC6', 'PC7', 'PC8','PC9', 'PC10'],
+              yylabels=['1'], 
+              view=True, save=False,
+              variance=False, cumulated_variance=True)
