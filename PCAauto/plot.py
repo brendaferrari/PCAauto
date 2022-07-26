@@ -3,18 +3,33 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import seaborn as sns
+import os
 #from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 
 class Plot:
 
-    def threed_bar_plot(self, filename, xlabel, ylabel, zlabel, xlabels, ylabels): #######
+    def bar_plot(self, xlabel, ylabel, zlabel, xxlabels, yylabels, view, save, variance=False, cumulated_variance=False):
+
+        if variance == True:
+            df = pd.read_csv('variance.dat', sep=' ', names=list(range(15)))
+
+            self.threed_bar_plot(df, xlabel=xlabel, ylabel=ylabel, zlabel=zlabel, xxlabels=xxlabels, yylabels=yylabels, view=True, save=False)
+
+        if cumulated_variance == True:
+            df = pd.read_csv('cumulated_variance.dat', sep=' ')
+            print(os.getcwd())
+            print(len(df.columns))
+
+            self.threed_bar_plot(df, xlabel=xlabel, ylabel=ylabel, zlabel=zlabel, xxlabels=xxlabels, yylabels=yylabels, view=True, save=False)
+            
+        return
+
+    def threed_bar_plot(self, filename, xlabel, ylabel, zlabel, xxlabels, yylabels, view=True, save=False): #######
         
         fig = plt.figure(figsize=(8, 3))
         ax1 = fig.add_subplot(111, projection='3d')
 
-        df = pd.read_csv(filename, sep='	', names=list(range(15)))
-
-        data = df.values.tolist()
+        data = filename.values.tolist()
         x = []
         y = []
         z = []
@@ -25,20 +40,16 @@ class Plot:
                 y.append(j)
                 z.append(data[i][j])
 
-        print(x)
-        print(y)
-        print(z)
-
         top = x + y
         bottom = np.zeros_like(x)
         width = depth = 0.6
 
-        ax1.set_xlabel('Cumulated Variance')
-        ax1.set_ylabel('Force field/water model')
-        ax1.set_zlabel('Eigenvalue Magnitude')
-        xlabels = np.array(['PC1', 'PC2', 'PC3','PC4', 'PC5','PC6', 'PC7', 'PC8','PC9', 'PC10'])
+        ax1.set_xlabel(xlabel)
+        ax1.set_ylabel(ylabel)
+        ax1.set_zlabel(zlabel)
+        xlabels = np.array(xxlabels)
         xpos = np.arange(xlabels.shape[0])
-        ylabels = np.array(['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'])
+        ylabels = np.array(yylabels)
         ypos = np.arange(ylabels.shape[0])
         zpos = data
 
@@ -63,7 +74,12 @@ class Plot:
 
         ax1.set_title(' ')
 
-        plt.show()
+        if view == True: 
+            print('Now you are visualizing the plot...')
+            plt.show()
+        if save == True:
+            print('Your plot has been saved.')
+            plt.savefig('plot_3d.png')
 
         return
 
@@ -116,3 +132,12 @@ class Plot:
         g.savefig('pairGrid.png')
 
         return
+
+########## UNDER DEVELOPMENT #############
+    # def time_scatterplot(self, df):
+
+    #     g = sns.scatterplot(df)
+
+    #     g.savefig('pcGraph.png') 
+        
+    #     return
