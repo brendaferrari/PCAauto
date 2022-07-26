@@ -47,7 +47,7 @@ class Options:
         print(f'Transformed shape: {transformed.shape}')
 
         df = pd.DataFrame(transformed,
-                          columns=['PC{}'.format(i+1) for i in range(n_dim)])
+                          columns=[f'PC{i+1}' for i in range(n_dim)])
         df['Time (ps)'] = df.index * self.u.trajectory.dt
         df.head()
 
@@ -56,18 +56,19 @@ class Options:
 
         return df, transformed
 
-    def visualize_movement(self, transformed, backbone): #This is bugged
+    def visualize_movement(self, transformed, backbone, pc=0):
 
-        pc1 = self.pc.p_components[:, 0]
-        trans1 = transformed[:, 0]
+        print(f'You are calculating tranjectory for {pc+1}')
+        pc1 = self.pc.p_components[:, pc]
+        trans1 = transformed[:, pc]
         projected = np.outer(trans1, pc1) + self.pc.mean.flatten()
         coordinates = projected.reshape(len(trans1), -1, 3)
 
         proj1 = mda.Merge(backbone)
         proj1.load_new(coordinates, order="fac")
 
-        proj1.atoms.write('pca1.pdb')
-        proj1.atoms.write('pca1.dcd', frames='all')
+        proj1.atoms.write('pc'+ str(pc) + '.pdb')
+        proj1.atoms.write('pc'+ str(pc) + '.dcd', frames='all')
 
         return proj1
 
@@ -76,7 +77,8 @@ class Options:
         data = []
 
         import os
-        os.chdir('../input/calculated1')
+        print(os.getcwd())
+        #os.chdir('../input')
         workdir = os.getcwd()
 
         if variance == True:
@@ -92,7 +94,6 @@ class Options:
                     for line in lines:
                         line_cleaned = line.strip('\n')
                         line_clean.append(line_cleaned)
-                    print(line_clean)
                     line_clean.insert(0, column_name[-1])
                     data.append(line_clean)
 
@@ -100,6 +101,7 @@ class Options:
             df.rename(columns=df.iloc[0], inplace=True)
             df = df.iloc[1:]
             df.to_csv('variance.csv', sep=' ', quoting=csv.QUOTE_ALL, index=None)
+            df.to_csv('variance.dat', sep=' ', index=None, header=None)
 
         if cumulated_variance == True:
             File = 'cumulated_variance.txt'
@@ -114,7 +116,6 @@ class Options:
                     for line in lines:
                         line_cleaned = line.strip('\n')
                         line_clean.append(line_cleaned)
-                    print(line_clean)
                     line_clean.insert(0, column_name[-1])
                     data.append(line_clean)
 
@@ -122,5 +123,6 @@ class Options:
             df.rename(columns=df.iloc[0], inplace=True)
             df = df.iloc[1:]
             df.to_csv('cumulated_variance.csv', sep=' ', quoting=csv.QUOTE_ALL, index=None)
+            df.to_csv('cumulated_variance.dat', sep=' ', index=None, header=None)
 
         return df
