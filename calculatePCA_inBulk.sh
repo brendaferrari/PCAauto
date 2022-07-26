@@ -10,7 +10,7 @@ cd "$dir";
 
 shopt -s extglob;
 
-if ls -l *.{pdb,xtc};
+if ls -l *.{gro,xtc};
 
 then echo Starting "${dir##*/}" PCA analysis;
 
